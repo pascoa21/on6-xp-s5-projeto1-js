@@ -274,9 +274,29 @@ console.log('-----------------------------------------------------')
 console.log('Classes 🆕')
 
 // Vamos criar a classe Pessoa
+class Pessoa{
+  constructor (name, surname, age, walking = false){
+    this.name = name
+    this.sobrenome = surname
+    this.idade = age
+    this.andando =walking
+  }
+  fazerAniversario(){
+      this.idade++
+  }
+  
+}
 
+const pessoa3 = new Pessoa('Jessyca', 'Pascoa', '29')
+console.log(pessoa3.nome)
 
+const {sobrenome} = pessoa3
 
+console.log(sobrenome)
+
+pessoa3.fazerAniversario()
+
+console.log(pessoa3)
 
 
 
@@ -318,6 +338,7 @@ const numbers = [9, 2, 5]
 // Possuo 4 tias. Os dados delas estão armazenados no array de objetos dentro do arquivo db.js
 // Vamos importar esses dados para podermos usá-los durante nosso exercício de revisão.
 const db = require('./db')
+const { tias } = require('./db')
 
 
 
@@ -353,8 +374,20 @@ console.log('map()')
 // map
 // Crie um novo array chamado tiasMaisChegadas e adicione uma propriedade chamada cuidouDeMim que recebe um valor booleano. Caso a tia teve até 2 filhos, isso significa que ela cuidou de mim e seu valor é true. Caso ela teve mais que 2 filhos, o valor da propriedade cuidouDeMim é false.
 
+function cuidar(tia){
 
+  const {nome, idade, filho, local} = tia
 
+  if(tia.filhos <= 2){
+    return tia.cuidouDeMim = true
+  } else {
+     return tia.cuidouDeMim = false
+  }
+}
+
+const tiasMaisChegadas = tias.map(cuidar)
+
+console.log(tias)
 
 
 
@@ -367,19 +400,26 @@ console.log('sort()')
 // const numbers = [9, 2, 5]
 
 const comparar = (a, b) => {
-  if (a < b) { // primeiro vem b e depois vem a
+  if (a < b) { // primeiro vem a e depois vem b
     return -1
-  } else if (a > b) { // mantenho a como primeiro e b vem depois
+  } else if (a > b) { // mantenho b como primeiro e a vem depois
     return 1
   } else { // se a e b forem iguais, mantém a mesma ordem
     return 0
   }
 }
 
+numbers.sort(comparar)
+console.log(numbers)
+
 // Refatore a função comparar e ordene numbers em ordem crescente
+/*function ordenarTias(a, b){
+  return b.idade - a.idade
+}
+tias.sort(ordenarTias)*/
 
-
-
+tias.sort((a,b) => b.idade - a.idade)
+console.log(tias)
 
 
 
@@ -400,15 +440,23 @@ console.log('reduce()')
 // Faça a soma do array numbers
 
 
+const arrayReduzido = numbers.reduce((acumulador, item)=> acumulador+item, 10)
 
+console.log(arrayReduzido)
 
 
 
 
 // Some a quantidade de netos que vovó possui.
 
+/*function somarNetos(acumulador, tia){
+  return acumulador+tia.filhos
+}
 
+const netos= tias.reduce(somarNetos, 0)*/
 
+const netos = tias.reduce((acumulador,tia)=> acumulador+tia.filhos, 1)
+console.log(netos)
 
 
 
